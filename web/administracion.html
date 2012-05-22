@@ -1,0 +1,41 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="Estilo/style.css">
+        <script type="text/javascript" src="./Scripts/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="./Scripts/codigoAjaxjQuery.js"></script>
+    </head>
+    <body>
+        <div id ="contenedorGlobal">
+            <div id ="barraAdministracion">
+                <span class="alineadoDerecha">
+                    <input type="button" value ="Salir" onclick="javascript:document.location.href='index.jsp'">
+                </span>
+            </div>
+            <div id ="panelAdministracion">
+                <fieldset>
+                    <legend>Panel Administración</legend>
+                    <form action="javascript:llamarAsincronoAdmin('realizarAdministracion', 'procesoIndex');">
+                        <input type ="radio" name ="opcion" id ="opcion" value="es" checked> Archivos Español<br>
+                        <input type ="radio" name ="opcion" id ="opcion2" value ="en"> Archivos Inglés<br><br>
+                        <hr>
+                        <input type ="radio" name ="metodo" id ="metodo" checked> Lucene <br>
+                        <input type ="radio" name ="metodo" id ="metodo2"> RapidMiner<br>
+                        <hr>
+                        <input type="submit" value ="Ejecutar Indexación" class="alineadoDerecha">
+                    </form>
+                </fieldset>
+                
+                <span id ="procesoIndex" class="colorVerde"></span>
+            </div>
+            
+        </div>
+        
+    </body>
+</html>

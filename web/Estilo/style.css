@@ -1,0 +1,63 @@
+/* 
+    Document   : style
+    Created on : 18-may-2012, 16:34:20
+    Author     : José Manuel Serrano Mármol
+    Author     : Raul Salazar de Torres
+    Description:
+*/
+
+root { 
+    display: block;
+}
+
+h1{
+    text-align: center;
+}
+
+#contenedorGlobal{
+    /*width: 700px; */
+    margin: auto;
+    /*border: 1px solid #d0d0d0;*/
+    height:auto;
+}
+
+#barraAdministracion{
+    /*border: 1px solid #d0d0d0;*/
+    height: 25px;
+    background-color: #777777;
+    opacity: 80%;
+}
+
+.alineadoDerecha{
+    float: right;
+}
+
+.colorVerde{
+    color: #00AA00;
+}
+
+#panelAdministracion{
+    position: relative;
+    width: 300px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#contenedor{
+    position: relative;
+    text-align: center;
+    margin-top: 200px;
+    /*border: 1px solid #d0d0d0;*/
+}
+
+#pie{
+    	position:relative;
+	text-align: center; 
+	width:100%;
+	margin:auto;
+	/*border: 1px solid #d0d0d0;*/
+	margin-top:10%;
+}
+
+
