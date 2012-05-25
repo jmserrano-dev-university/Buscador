@@ -1,6 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Clase SpanishStemFilter.java
+ * @author José Manuel Serrano Mármol
+ * @author Raul Salazar de Torres
+ * Clase que realiza la extración de las raices de cada token
  */
 package Procesamiento;
 

@@ -3,7 +3,7 @@
     Created on : 18-may-2012, 16:34:20
     Author     : José Manuel Serrano Mármol
     Author     : Raul Salazar de Torres
-    Description:
+    Description: Hoja de estilo para el buscador
 */
 
 root { 
@@ -61,3 +61,10 @@ h1{
 }
 
 
+.oculto{
+    visibility: hidden;
+}
+
+a{
+    color: blue;
+}

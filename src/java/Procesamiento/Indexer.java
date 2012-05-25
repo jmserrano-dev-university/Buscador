@@ -1,8 +1,13 @@
+/**
+ * Clase Indexer.java
+ * @author José Manuel Serrano Mármol
+ * @author Raul Salazar de Torres
+ * Clase que realiza la indexación de los archivos en los cuales se quiere realizar la búsqueda
+ */
+
 package Procesamiento;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -66,8 +71,35 @@ public class Indexer {
 	 */
 	protected Document getDocument(File f) throws Exception {
 		Document doc = new Document();
+                String titulo;
+                
+                //Extraemos el título de los documentos
+                Runtime sistema = Runtime.getRuntime();
+                Process proceso = sistema.exec("java -jar /home/serrano/NetBeansProjects/Buscador/htmlparser1_6/lib/htmlparser.jar " + f.getCanonicalPath().replace("Procesados", "Originales") + " title");
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
+                titulo = buffer.readLine();
+                titulo = titulo.substring(7);
+                System.out.println("Titulo: " + titulo);
+                
+                //Guardamos el ducumento original
+//                File original = new File(f.getCanonicalPath().replace("Procesados", "Originales"));
+//                Scanner scan = new Scanner(original);
+//                String contenidoOriginal = "";
+//                while(scan.hasNext()){
+//                    contenidoOriginal = contenidoOriginal + scan.nextLine();
+//                }
+                proceso = sistema.exec("java -jar /home/serrano/NetBeansProjects/Buscador/htmlparser1_6/lib/htmlparser.jar " + f.getCanonicalPath().replace("Procesados", "Originales") + " p");
+                buffer = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
+                String  linea, contenidoOriginal = "";
+                while((linea = buffer.readLine()) != null){
+                    contenidoOriginal = contenidoOriginal + linea + "\n";
+                }
+                
+                
+                doc.add(new Field("original",contenidoOriginal,Field.Store.COMPRESS,Field.Index.ANALYZED,Field.TermVector.WITH_POSITIONS_OFFSETS));
+                doc.add(new Field("titulo", titulo, Field.Store.YES, Field.Index.NO));
 		doc.add(new Field("contents", new FileReader(f)));
-		doc.add(new Field("filename", f.getCanonicalPath(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+		doc.add(new Field("filename", f.getCanonicalPath().replace("Procesados", "Originales"), Field.Store.YES, Field.Index.NOT_ANALYZED));
 		return doc;
 	}
 	

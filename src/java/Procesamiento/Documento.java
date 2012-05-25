@@ -2,6 +2,7 @@
  * Clase Documento.java
  * @author José Manuel Serrano Mármol
  * @author Raul Salazar de Torres
+ * Clase que encapsula los campos de un documento para su mejor utilización
  */
 package Procesamiento;
 
@@ -15,7 +16,8 @@ public class Documento {
         _cuerpo = cuerpo;
         _nombreDocumento = nombre;
     }
-    
+            
+            
     public String getTitulo(){
         return _titulo;
     }

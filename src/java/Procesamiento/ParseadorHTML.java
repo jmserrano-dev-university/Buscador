@@ -2,6 +2,7 @@
  * Clase ParseadorHTML.java
  * @author José Manuel Serrano Mármol
  * @author Raul Salazar de Torres
+ * Clase que parsea un HTML para su posterior preprocesamiento
  */
 package Procesamiento;
 
@@ -11,6 +12,11 @@ import java.util.List;
 
 public class ParseadorHTML {
     
+    /**
+     * Ejecuta el parseado del HTML
+     * @param rutaDirectorio Ruta del directorio que queremos parsear
+     * @return La lista de documentos parseados
+     */
     public static List<Documento> ejecutarParserHTML(String rutaDirectorio) {
         List<Documento> listaDocumentos = new ArrayList<Documento>();
         File directorio = new File(rutaDirectorio);
@@ -22,7 +28,7 @@ public class ParseadorHTML {
         
         for(int i = 0; i < ficheros.length; i++){
             try {
-                //Parseamos lo html
+                //Parseamos el html
                 Process proceso = sistema.exec("/home/serrano/NetBeansProjects/Buscador/htmlparser1_6/bin/stringextractor " + rutaDirectorio+"/"+ficheros[i]);
                 
                 //Parseamos el cuerpo del HTML
@@ -49,6 +55,12 @@ public class ParseadorHTML {
         return listaDocumentos;
     }
     
+    /**
+     * Escribe los documentos que recibe como parámetros en el dísco trás procesarlos
+     * @param listaDocumento Lista de docuemntos a escribir en disco
+     * @param ficheroEnEspanol Indica si los fichero son en español o en inglés
+     * @throws IOException 
+     */
     public static void escribirDocumentosDisco(List<Documento> listaDocumento,boolean ficheroEnEspanol) throws IOException{
         String ruta = "";
         if(ficheroEnEspanol){

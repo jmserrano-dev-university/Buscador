@@ -27,6 +27,11 @@
         
     </head>
     <body>
+        <%
+            //Ponemos la sesion a null
+            HttpSession sesion= request.getSession();
+            sesion.removeAttribute("acceso");
+        %>
         <div id="contenedorGlobal">
             <div id ="barraAdministracion">
                 <input type="button" value ="Administrar" onclick="panelAdministracion()">
