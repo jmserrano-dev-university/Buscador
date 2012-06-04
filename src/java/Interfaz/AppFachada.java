@@ -7,9 +7,7 @@
 package Interfaz;
 
 import Procesamiento.*;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.lucene.analysis.Analyzer;
@@ -36,7 +34,7 @@ public class AppFachada {
     }
        
     /**
-     * Realiza el procesamiento de los archivos
+     * Realiza el procesamiento de los archivos - LUCENE
      * @throws IOException 
      */
     private void procesamiento() throws IOException{
@@ -76,7 +74,34 @@ public class AppFachada {
     }
     
     /**
-     * Procesar los archivos en español
+     * Realiza el procesamiento de los archivos - RAPIDMINER
+     * @throws IOException 
+     */
+    private void procesamientoRapidminer() throws IOException{
+            //Preprocesamiento - Realizado en un script SH
+            Runtime sistema = Runtime.getRuntime();
+            Process proceso = sistema.exec(Rutas.RUTA_RAPIDMINER_SPANISH);
+            
+            
+            //Parseamos el cuerpo del HTML
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
+            String linea = "";
+            while((linea = buffer.readLine()) != null){
+                System.out.println(linea);
+            }
+            
+            //Indexamos los archivos
+            Indexer indexador = new Indexer(rutaIndexador, analizador);
+            try {
+                indexador.index(ruta);
+                indexador.close();
+            } catch (Exception ex) {
+                System.out.println("ERROR indexando archivos");
+            }
+    }
+    
+    /**
+     * Procesar los archivos en español - LUCENE
      */
     public void procesarArchivosEspanol() throws IOException{
          listaDocumentos = ParseadorHTML.ejecutarParserHTML(Rutas.RUTA_ARCHIVOS_ORIGINALES_SPANISH);
@@ -87,8 +112,15 @@ public class AppFachada {
          procesamiento();
     }
     
+    public void procesarArchivosEspanolRapid() throws IOException{
+         analizador = new SpanishAnalyzer();
+         ruta = Rutas.RUTA_ARCHIVOS_PROCESADOS_SPANISH;
+         rutaIndexador = Rutas.RUTA_INDEXADOR_SPANISH;
+         procesamientoRapidminer();
+    }
+    
     /**
-     * Procesar los archivos en inglés
+     * Procesar los archivos en inglés - LUCENE
      */
     public void procesarArchivosIngles() throws IOException{
         listaDocumentos = ParseadorHTML.ejecutarParserHTML(Rutas.RUTA_ARCHIVOS_ORIGINALES_ENGLISH);
@@ -97,6 +129,14 @@ public class AppFachada {
         ruta = Rutas.RUTA_ARCHIVOS_PROCESADOS_ENGLISH;
         rutaIndexador = Rutas.RUTA_INDEXADOR_ENGLISH;
         procesamiento();
+    }
+    
+    
+    public void procesarArchivosInglesRapid() throws IOException{
+        analizador = new StandardAnalyzer();
+        ruta = Rutas.RUTA_ARCHIVOS_PROCESADOS_ENGLISH;
+        rutaIndexador = Rutas.RUTA_INDEXADOR_ENGLISH;
+        procesamientoRapidminer();
     }
     
     /**

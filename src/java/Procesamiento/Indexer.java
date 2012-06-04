@@ -72,7 +72,7 @@ public class Indexer {
 	protected Document getDocument(File f) throws Exception {
 		Document doc = new Document();
                 String titulo;
-                
+                System.out.println("Indexando... " +  f.getCanonicalPath());
                 //Extraemos el título de los documentos
                 Runtime sistema = Runtime.getRuntime();
                 Process proceso = sistema.exec("java -jar /home/serrano/NetBeansProjects/Buscador/htmlparser1_6/lib/htmlparser.jar " + f.getCanonicalPath().replace("Procesados", "Originales") + " title");
@@ -88,7 +88,8 @@ public class Indexer {
 //                while(scan.hasNext()){
 //                    contenidoOriginal = contenidoOriginal + scan.nextLine();
 //                }
-                proceso = sistema.exec("java -jar /home/serrano/NetBeansProjects/Buscador/htmlparser1_6/lib/htmlparser.jar " + f.getCanonicalPath().replace("Procesados", "Originales") + " p");
+                //proceso = sistema.exec("java -jar /home/serrano/NetBeansProjects/Buscador/htmlparser1_6/lib/htmlparser.jar " + f.getCanonicalPath().replace("Procesados", "Originales") + " p");
+                proceso = sistema.exec("/home/serrano/NetBeansProjects/Buscador/htmlparser1_6/bin/stringextractor " + f.getCanonicalPath().replace("Procesados", "Originales"));
                 buffer = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
                 String  linea, contenidoOriginal = "";
                 while((linea = buffer.readLine()) != null){

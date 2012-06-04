@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for i in  $(ls -b ./Originales_es);
+	do
+		oldname="$i"
+		echo $oldname
+		newname="f1.htm"
+		mv ./Originales_es/$oldname ./Originales_es/$newname
+		../../../Rapidminer/scripts/rapidminer -f /home/serrano/Rapidminer/Repositorio/buscador_es.rmp
+		mv ./Originales_es/$newname ./Originales_es/$oldname
+		mv -i ./Procesados_es/result.htm ./Procesados_es/$oldname
+	done
+

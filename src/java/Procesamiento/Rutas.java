@@ -14,4 +14,6 @@ public class Rutas {
     public static final String RUTA_ARCHIVOS_PROCESADOS_ENGLISH = "/home/serrano/NetBeansProjects/Buscador/Documentos/Procesados_en/";
     public static final String RUTA_INDEXADOR_SPANISH = "/home/serrano/NetBeansProjects/Buscador/Documentos/Temporal_es";
     public static final String RUTA_INDEXADOR_ENGLISH = "/home/serrano/NetBeansProjects/Buscador/Documentos/Temporal_en";
+    public static final String RUTA_RAPIDMINER_SPANISH = "/home/serrano/NetBeansProjects/Buscador/Documentos/ejecutaRapidES.sh";
+    public static final String RUTA_RAPIDMINER_ENGLISH = "/home/serrano/NetBeansProjects/Buscador/Documentos/ejecutaRapidEN.sh";
 }

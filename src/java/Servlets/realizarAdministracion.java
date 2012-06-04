@@ -35,18 +35,32 @@ public class realizarAdministracion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String opcion = request.getParameter("opcion");
+            //Captamos los parametros de administración
+            String opcion = request.getParameter("opcion"); //Idioma
+            String metodo = request.getParameter("metodo"); //Metodo - Lucene o Rapidminer
+            
+            
             
             System.out.println("Opcion: " + opcion);
+            System.out.println("Metodo: " + metodo);
             AppFachada app = new AppFachada();
             
             
             if(opcion.equalsIgnoreCase("true")){
                 //Procesamiento de los documentos en español
-                app.procesarArchivosEspanol();
+                if(metodo.equalsIgnoreCase("true")){ //Utilizando Lucene
+                    app.procesarArchivosEspanol();
+                }else{ //Utilizando Rapidminer
+                    app.procesarArchivosEspanolRapid();
+                }
             }else{
                 //Procesamiento de los documentos en inglés
-                app.procesarArchivosIngles();
+                if(metodo.equalsIgnoreCase("true")){ //Utilizando Lucene
+                    app.procesarArchivosIngles();
+                }else{ //Utilizando Rapidminer
+                    app.procesarArchivosInglesRapid();
+                }
+                
             }
 
             

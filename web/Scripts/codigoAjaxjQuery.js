@@ -30,11 +30,13 @@ function llamarAsincronoSolicitarBusqueda (p_url, id_contenedor) {
  */
 function llamarAsincronoAdmin (p_url, id_contenedor) {
 	var opcion = document.getElementById('opcion').checked;
+        var metodo = document.getElementById('metodo').checked;
         
         console.log($('form').serialize());
         
         document.getElementById("cargando").style.visibility="visible";
         
+        //Hacemos visible el icono loading del procesamiento
         $('#cargando').ajaxStart(function() {
             $(this).show();
             document.getElementById("procesoIndex").innerHTML="";
@@ -42,13 +44,14 @@ function llamarAsincronoAdmin (p_url, id_contenedor) {
         });
         
         $.post(p_url,
-               {'opcion' : opcion},
+               {'opcion' : opcion,'metodo':metodo},
                function(data){
                    var idc = '#' + id_contenedor;
                    $(idc).html("Procesamiento Correcto");
                }
         );
-            	
+        
+        //Hacemos oculto el icono loading del procesamiento
         $('#cargando').ajaxStop(function() {
             $(this).hide();
             document.getElementById("boton").disabled=false;
